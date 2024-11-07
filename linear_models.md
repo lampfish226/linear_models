@@ -134,3 +134,30 @@ fit %>%
 | Borough: Brooklyn |  -49.754 |   0.000 |
 | Borough: Queens   |  -77.048 |   0.000 |
 | Borough: Bronx    |  -90.254 |   0.000 |
+
+## Some diagnostics
+
+(backtrack to some EDA)
+
+``` r
+nyc_airbnb %>% 
+  ggplot(aes(x = stars, y = price)) +
+  geom_point() +
+  stat_smooth(method = "lm")
+```
+
+    ## `geom_smooth()` using formula = 'y ~ x'
+
+<img src="linear_models_files/figure-gfm/unnamed-chunk-5-1.png" width="90%" />
+
+Most diagnostics use residuals.
+
+``` r
+modelr::add_residuals(nyc_airbnb, fit) %>% 
+  ggplot(aes(x = resid)) +
+  geom_histogram()
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+<img src="linear_models_files/figure-gfm/unnamed-chunk-6-1.png" width="90%" />
